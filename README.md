@@ -1,4 +1,4 @@
-Java SDK for api.ai
+Api.AI
 ==================
 
 The API.AI Java SDK makes it easy to integrate speech recognition with [API.AI](http://www.api.ai) natural language processing API on Android devices. API.AI allows using voice commands and integration with dialog scenarios defined for a particular agent in API.AI.

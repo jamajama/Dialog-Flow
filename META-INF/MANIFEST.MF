@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: libai-base
+Bundle-SymbolicName: libai-base
+Bundle-Version: 1.0.0.qualifier

@@ -16,13 +16,10 @@
  
 package ai.api.speech.gcp;
 
+import io.grpc.StatusRuntimeException;
+
 import java.io.IOException;
 import java.io.InputStream;
-
-import com.google.cloud.speech.spi.v1.SpeechClient;
-import com.google.cloud.speech.v1.RecognitionAudio;
-import com.google.cloud.speech.v1.RecognizeResponse;
-import com.google.protobuf.ByteString;
 
 import ai.api.AIDataService;
 import ai.api.AIServiceContext;
@@ -30,7 +27,11 @@ import ai.api.AIServiceException;
 import ai.api.RequestExtras;
 import ai.api.model.AIRequest;
 import ai.api.model.AIResponse;
-import io.grpc.StatusRuntimeException;
+
+import com.google.cloud.speech.spi.v1.SpeechClient;
+import com.google.cloud.speech.v1.RecognitionAudio;
+import com.google.cloud.speech.v1.RecognizeResponse;
+import com.google.protobuf.ByteString;
 
 /**
  * AIDataService with Google Speech API support
@@ -67,10 +68,13 @@ public class GcpAIDataService extends AIDataService {
 		
 	  RecognizeResponse response;
 		try {
+			
+			
 		    SpeechClient speechClient = SpeechClient.create();
 			RecognitionAudio recognitionAudio = createRecognitionAudio(voiceStream);
-
+		    
 	        response = speechClient.recognize(config.getRecognitionConfig(), recognitionAudio);
+
 		} catch (IOException | StatusRuntimeException e) {
 			throw new AIServiceException("Failed to recognize speech", e);
 		}
@@ -78,6 +82,7 @@ public class GcpAIDataService extends AIDataService {
 			throw new AIServiceException("No speech");
 		}
 		String transcript = response.getResults(0).getAlternatives(0).getTranscript();
+		//String transcript = "How are you";
 		AIRequest request = new AIRequest(transcript);
 		return request(request, requestExtras, serviceContext);
 	}

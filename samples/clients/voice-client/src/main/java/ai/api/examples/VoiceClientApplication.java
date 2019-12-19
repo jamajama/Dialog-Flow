@@ -18,6 +18,9 @@ package ai.api.examples;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 
 import ai.api.model.AIResponse;
 import ai.api.speech.gcp.GcpAIConfiguration;
@@ -37,14 +40,21 @@ public class VoiceClientApplication {
    * @param args List of parameters:<br>
    *        First parameters should be valid api key<br>
    *        Second and the following args should be file names containing audio data.
+ * @throws IOException 
    */
-  public static void main(String[] args) {
+  public static void main(String[] args) throws IOException {
     if (args.length < 1) {
       showHelp("Please specify API key", ERROR_EXIT_CODE);
     }
 
     GcpAIConfiguration configuration = new GcpAIConfiguration(args[0]);
-
+    
+	System.setProperty("https.proxyHost", "proxy.us.dhl.com");
+	System.setProperty("https.proxyPort", "8080");
+    
+    Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("proxy.us.dhl.com", 8080));
+    configuration.setProxy(proxy);
+    
     GcpAIDataService dataService = new GcpAIDataService(configuration);
 
     for (int i = 1; i < args.length; ++i) {

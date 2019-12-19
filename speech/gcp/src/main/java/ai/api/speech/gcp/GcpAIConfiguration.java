@@ -19,10 +19,10 @@ package ai.api.speech.gcp;
 import java.util.Arrays;
 import java.util.List;
 
+import ai.api.AIConfiguration;
+
 import com.google.cloud.speech.v1.RecognitionConfig;
 import com.google.cloud.speech.v1.RecognitionConfig.AudioEncoding;
-
-import ai.api.AIConfiguration;
 
 /**
  * Configuration for {@link GcpAIDataService}
@@ -39,7 +39,8 @@ public class GcpAIConfiguration extends AIConfiguration {
             .setSampleRateHertz(DEFAULT_SAMPLING_RATE)
             .setLanguageCode(getLanguage())
             .build();
-
+	
+	
 	/**
 	 * Create new configuration and initialize client access token
 	 * @param clientAccessToken <a href="https://docs.api.ai/docs/authentication#obtaining-access-tokens">

@@ -13,6 +13,11 @@
 
 	<web>
 		<link target="/">
+			<dir name="C:/eclipse/github/dialog-flow/samples/clients/web-client/target/m2e-wtp/web-resources">
+				<exclude name="/"/>
+			</dir>
+		</link>
+		<link target="/">
 			<dir name="C:/eclipse/github/dialog-flow/samples/clients/web-client/src/main/webapp">
 			</dir>
 		</link>

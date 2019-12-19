@@ -186,7 +186,7 @@ public class AIDataService {
         throw new AIServiceException(
             "Empty response from ai service. Please check configuration and Internet connection.");
       }
-
+      System.out.println(response);
       logger.debug("Response json: " + response.replaceAll("[\r\n]+", " "));
 
       final AIResponse aiResponse = GSON.fromJson(response, AIResponse.class);
